@@ -18,22 +18,12 @@ env:
 jobs:
   build:
     runs-on: ubuntu-18.04
-    
-
-  # Push image to GitHub Packages.
-  # See also https://docs.docker.com/docker-hub/builds/
-  push:
-    # Ensure test job passes before pushing image.
-    needs: build
-
-    runs-on: ubuntu-18.04
-    if: github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Build image
-        run: cd CMAK && docker build . --file Dockerfile --tag $IMAGE_NAME
+        run: cd cmak && docker build . --file Dockerfile --tag $IMAGE_NAME
 
 #       - name: Log into GitHub Container Registry
 #       # TODO: Create a PAT with `read:packages` and `write:packages` scopes and save it as an Actions secret `CR_PAT`
